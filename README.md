@@ -1,7 +1,6 @@
-
 # 🔒 SecureAuthSystem Documentation
 
-SecureAuthSystem provides a comprehensive authentication framework, allowing users to register and log in using various methods. This system combines security and flexibility for a seamless user experience.
+SecureAuthSystem provides a robust authentication framework allowing users to register and log in using multiple options. This solution combines security and flexibility for seamless user access.
 
 ---
 
@@ -9,7 +8,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
 
 ### 1. **User Registration**
    - **Endpoint**: `POST http://serverxyz:9090/auth/signup`
-   - **Description**: Registers a new user with the required information.
+   - **Description**: Registers a new user by collecting essential details.
    - **Request Body**:
      ```json
      {
@@ -35,7 +34,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
 
 ### 2. **Login with Username and Password**
    - **Endpoint**: `POST http://serverxyz:9090/auth/login`
-   - **Description**: Authenticates a user with their username and password.
+   - **Description**: Authenticates a user using their username and password.
    - **Request Body**:
      ```json
      {
@@ -46,7 +45,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
 
 ### 3. **OTP Verification for Mobile**
    - **Endpoint**: `POST http://serverxyz:9090/auth/verify-otp`
-   - **Description**: Verifies the OTP sent to the user's mobile number.
+   - **Description**: Verifies OTP sent to the user’s mobile.
    - **Request Body**:
      ```json
      {
@@ -57,7 +56,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
 
 ### 4. **Login with Mobile Number**
    - **Endpoint**: `POST http://serverxyz:9090/auth/login-with-mobile`
-   - **Description**: Initiates an OTP-based login using the mobile number.
+   - **Description**: Initiates OTP-based login using a mobile number.
    - **Request Body**:
      ```json
      {
@@ -67,7 +66,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
 
 ### 5. **Login with Email**
    - **Endpoint**: `POST http://serverxyz:9090/auth/login-with-email`
-   - **Description**: Initiates an OTP-based login using the email address.
+   - **Description**: Initiates OTP-based login using an email.
    - **Request Body**:
      ```json
      {
@@ -88,7 +87,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
 
 ### 7. **Password Reset via Email**
    - **Endpoint**: `POST http://localhost:9090/auth/ForgetPasswordwithemail`
-   - **Description**: Initiates the password reset process by sending a reset link or OTP to the provided email.
+   - **Description**: Initiates the password reset process by sending a reset link or OTP to the email.
    - **Request Body**:
      ```json
      {
@@ -98,7 +97,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
 
 ### 8. **Reset Password**
    - **Endpoint**: `POST http://localhost:9090/auth/reset-password`
-   - **Description**: Allows the user to reset their password using an OTP.
+   - **Description**: Allows the user to reset their password using a provided OTP.
    - **Request Body**:
      ```json
      {
@@ -127,7 +126,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
      ```
 
 ### 2. **Category Table**
-   - Defines categories that are unique within the system.
+   - Defines unique categories.
    - **SQL**:
      ```sql
      CREATE TABLE Category (
@@ -137,7 +136,7 @@ SecureAuthSystem provides a comprehensive authentication framework, allowing use
      ```
 
 ### 3. **Subcategory Table**
-   - Stores subcategories associated with specific categories, creating a hierarchical structure.
+   - Stores subcategories linked to specific categories for hierarchy.
    - **SQL**:
      ```sql
      CREATE TABLE Subcategory (
