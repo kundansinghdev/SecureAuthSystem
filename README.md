@@ -21,6 +21,21 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
      }
      ```
 
+
+   - **Response**:
+     - **Success (201 Created)**:
+       ```json
+       {
+         "message": "Congratulations, kundansingh! Your account has been created successfully. Welcome aboard!"
+       }
+       ```
+     - **Failure (400 Bad Request)**:
+       ```json
+       {
+         "error": "Signup failed. Please ensure all fields are filled out correctly and try again."
+       }
+       ```
+
 ### 2. **Login with Username and Password**
    - **Endpoint**: `POST http://serverxyz:9090/auth/login`
    - **Description**: Authenticates a user using their username and password.
