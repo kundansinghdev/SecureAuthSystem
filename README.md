@@ -1,8 +1,7 @@
 
-
 # 🔒 SecureAuthSystem Documentation
 
-SecureAuthSystem provides a robust authentication framework allowing users to register and log in using multiple options. This solution combines security and flexibility for seamless user access.
+SecureAuthSystem provides a comprehensive authentication framework, allowing users to register and log in using various methods. This system combines security and flexibility for a seamless user experience.
 
 ---
 
@@ -10,7 +9,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
 
 ### 1. **User Registration**
    - **Endpoint**: `POST http://serverxyz:9090/auth/signup`
-   - **Description**: Registers a new user by collecting essential details.
+   - **Description**: Registers a new user with the required information.
    - **Request Body**:
      ```json
      {
@@ -20,8 +19,6 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
        "email": "kundangetcode@gmail.com"
      }
      ```
-
-
    - **Response**:
      - **Success (201 Created)**:
        ```json
@@ -38,7 +35,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
 
 ### 2. **Login with Username and Password**
    - **Endpoint**: `POST http://serverxyz:9090/auth/login`
-   - **Description**: Authenticates a user using their username and password.
+   - **Description**: Authenticates a user with their username and password.
    - **Request Body**:
      ```json
      {
@@ -49,7 +46,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
 
 ### 3. **OTP Verification for Mobile**
    - **Endpoint**: `POST http://serverxyz:9090/auth/verify-otp`
-   - **Description**: Verifies OTP sent to the user’s mobile.
+   - **Description**: Verifies the OTP sent to the user's mobile number.
    - **Request Body**:
      ```json
      {
@@ -60,7 +57,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
 
 ### 4. **Login with Mobile Number**
    - **Endpoint**: `POST http://serverxyz:9090/auth/login-with-mobile`
-   - **Description**: Initiates OTP-based login using a mobile number.
+   - **Description**: Initiates an OTP-based login using the mobile number.
    - **Request Body**:
      ```json
      {
@@ -70,7 +67,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
 
 ### 5. **Login with Email**
    - **Endpoint**: `POST http://serverxyz:9090/auth/login-with-email`
-   - **Description**: Initiates OTP-based login using an email.
+   - **Description**: Initiates an OTP-based login using the email address.
    - **Request Body**:
      ```json
      {
@@ -91,7 +88,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
 
 ### 7. **Password Reset via Email**
    - **Endpoint**: `POST http://localhost:9090/auth/ForgetPasswordwithemail`
-   - **Description**: Initiates the password reset process by sending a reset link or OTP to the email.
+   - **Description**: Initiates the password reset process by sending a reset link or OTP to the provided email.
    - **Request Body**:
      ```json
      {
@@ -101,7 +98,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
 
 ### 8. **Reset Password**
    - **Endpoint**: `POST http://localhost:9090/auth/reset-password`
-   - **Description**: Allows the user to reset their password using a provided OTP.
+   - **Description**: Allows the user to reset their password using an OTP.
    - **Request Body**:
      ```json
      {
@@ -130,7 +127,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
      ```
 
 ### 2. **Category Table**
-   - Defines unique categories.
+   - Defines categories that are unique within the system.
    - **SQL**:
      ```sql
      CREATE TABLE Category (
@@ -140,7 +137,7 @@ SecureAuthSystem provides a robust authentication framework allowing users to re
      ```
 
 ### 3. **Subcategory Table**
-   - Stores subcategories linked to specific categories for hierarchy.
+   - Stores subcategories associated with specific categories, creating a hierarchical structure.
    - **SQL**:
      ```sql
      CREATE TABLE Subcategory (
