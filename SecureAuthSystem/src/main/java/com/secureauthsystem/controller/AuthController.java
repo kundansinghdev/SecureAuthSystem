@@ -34,13 +34,16 @@ public class AuthController {
             log.info("Signup successful: {}", message);
         } catch (Exception e) {
             log.error("Exception during signup", e);
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.ok(e.getMessage());
+            
         }
         log.info("Signup response sent");
       // return ResponseEntity.status(HttpStatus.CREATED).body(message);
         return ResponseEntity.ok(message);
        
     }
+
+    
 
     // Login Endpoint
     @PostMapping("/login")
