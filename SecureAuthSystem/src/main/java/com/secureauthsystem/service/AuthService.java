@@ -114,7 +114,7 @@ public class AuthService {
 
     // Generate a random 6-digit OTP
     private String generateOtp() {
-        return String.format("%06d", new Random().nextInt(999999));
+        return String.format("%04d", new Random().nextInt(9999));
     }
 
     // Method to verify the OTP sent to mobile
@@ -149,23 +149,16 @@ public class AuthService {
         return countryCode + mobileNumber;
     }
 
-    // Validate if user information already exists
     private void validateUserExistence(UserCredentialsDTO userCredentialsDTO) {
         if (isUsernameTaken(userCredentialsDTO.getUsername()) ||
-            isEmailTaken(userCredentialsDTO.getEmail()) ||
             isMobileNumberTaken(userCredentialsDTO.getMobileNumber())) {
-            throw new UserAlreadyExistsException("A user with that username, email, or mobile number already exists. Please try logging in or use different credentials.");
+            throw new UserAlreadyExistsException("A user with that username or mobile number already exists. Please try logging in or use different credentials.");
         }
     }
 
     // Check if the username is already taken
     private boolean isUsernameTaken(String username) {
         return userCredentialsRepository.findByUsername(username).isPresent();
-    }
-
-    // Check if the email is already taken
-    private boolean isEmailTaken(String email) {
-        return userCredentialsRepository.findByEmail(email).isPresent();
     }
 
     // Check if the mobile number is already taken
@@ -175,6 +168,7 @@ public class AuthService {
 
     // Map UserCredentialsDTO to UserCredentials model
     private UserCredentials mapToUserCredentials(UserCredentialsDTO userCredentialsDTO) {
+
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setUsername(userCredentialsDTO.getUsername());
         userCredentials.setPassword(userCredentialsDTO.getPassword()); // Ensure to hash in production
@@ -182,4 +176,75 @@ public class AuthService {
         userCredentials.setEmail(userCredentialsDTO.getEmail());
         return userCredentials;
     }
+    
+    // Method to send OTP for password reset
+    public Optional<String> sendPasswordResetOtp(String email) {
+
+        Optional<UserCredentials> user = userCredentialsRepository.findByEmail(email);
+
+        if (user.isPresent()) {
+            String otp = generateOtp();
+            otpStorage.put(email, new OtpVerificationEmailDTO(email, otp));
+
+            if (emailService.sendOtpToEmail(email, otp)) {
+                return Optional.of("An OTP has been sent to your email for password reset.");
+            }
+        }
+        return Optional.empty();
+    }
+    
+    // Verify OTP and reset password
+    public boolean verifyOtpAndResetPassword(String email, String otp, String newPassword) {
+        OtpVerificationEmailDTO otpData = otpStorage.get(email);
+
+        if (otpData != null && otpData.getOtp().equals(otp)) {
+            Optional<UserCredentials> user = userCredentialsRepository.findByEmail(email);
+
+            if (user.isPresent()) {
+                UserCredentials userCredentials = user.get();
+                userCredentials.setPassword(newPassword); // In production, hash the password
+                userCredentialsRepository.save(userCredentials);
+
+                otpStorage.remove(email); // Clear OTP after successful reset
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // Method to send OTP for Username reset
+    public Optional<String> sendUsernameResetOtp(String email) {
+
+        Optional<UserCredentials> user = userCredentialsRepository.findByEmail(email);
+
+        if (user.isPresent()) {
+            String otp = generateOtp();
+            otpStorage.put(email, new OtpVerificationEmailDTO(email, otp));
+
+            if (emailService.sendOtpToEmail(email, otp)) {
+                return Optional.of("An OTP has been sent to your email for UserName reset.");
+            }
+        }
+        return Optional.empty();
+    }
+    
+    // Verify OTP and reset Username
+    public boolean verifyOtpAndResetUsername(String email, String otp, String newUsername) {
+        OtpVerificationEmailDTO otpData = otpStorage.get(email);
+
+        if (otpData != null && otpData.getOtp().equals(otp)) {
+            Optional<UserCredentials> user = userCredentialsRepository.findByEmail(email);
+
+            if (user.isPresent()) {
+                UserCredentials userCredentials = user.get();
+                userCredentials.setUsername(newUsername); // 
+                userCredentialsRepository.save(userCredentials);
+
+                otpStorage.remove(email); 
+                return true;
+            }
+        }
+        return false;
+    }
+ 
 }
